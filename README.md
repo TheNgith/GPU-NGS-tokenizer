@@ -6,7 +6,12 @@ Major tokenizers are CPU-only, while tokenization is a massively parallel task, 
 
 Our work aims to design a memory-centric GPU tokenizer that: eliminates shared-memory bank conflicts, maximizes coalesced memory access and memory bandwidth via minimal bit length representations.
 
-This repository contains source code of the optimized kernel (in `src/gpu_optimized/main.cu`) and benchmarking instructions.
+This repository contains the source code of the [optimized kernel](src/gpu_optimized/main.cu) along with benchmarking instructions.
+
+> [!NOTE]
+> **Proudly presented at the 2026 Florida Undergraduate Research Conference (FURC)**  
+> March 2026 · Jacksonville, FL  
+> 📄 [View poster](./FURC_poster.pdf)
 
 ## Project Structure
 
@@ -36,7 +41,8 @@ To generate your own custom dataset, you can use the provided data generation sc
 python3 scripts/generate_data.py --num-seqs 1000 --length 150 --output custom_data.txt
 ```
 
-> **Warning**: The current pipeline is strictly capable of processing sequences up to **1024 base pairs** in length. Attempting to use sequences longer than this will result in undefined behavior, truncation, or memory errors depending on the constant configurations (`MAX_TOKENS`).
+> [!WARNING]
+> The current pipeline is strictly capable of processing sequences up to **1024 base pairs** in length. Attempting to use sequences longer than this will result in undefined behavior, truncation, or memory errors depending on the constant configurations (`MAX_TOKENS`).
 
 ## Setup & Build
 
@@ -119,8 +125,8 @@ python experiments/pipeline_naive_gpu/pipeline_naive_gpu.py \
     --output pipeline_naive_gpu.csv \
     --benchmarking
 ```
-
-*Note: Omit `--benchmarking` if you want to write the output tensors to a CSV.*
+> [!TIP]
+> Omit `--benchmarking` if you want to write the output tensors to a CSV.
 
 ### Hardware specifications (for development and testing)
 - CPU: AMD EPYC 7H12 64-Core @ 2.60GHz/3.30GHZ
